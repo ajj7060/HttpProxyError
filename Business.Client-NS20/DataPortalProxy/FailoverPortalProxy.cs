@@ -14,12 +14,12 @@ namespace Business.DataPortalProxy {
 			if (!this.proxies.Any()) { throw new ArgumentException("need at least one proxy", nameof(proxies)); }
 		}
 
-		public Task<DataPortalResult> Create(Type objectType, object criteria, DataPortalContext context, bool isSync) {
-			Task<DataPortalResult> result = null;
+		public async Task<DataPortalResult> Create(Type objectType, object criteria, DataPortalContext context, bool isSync) {
+			DataPortalResult result = null;
 
 			for (var i = 0; i < proxies.Count; i += 1) {
 				try {
-					result = proxies[i].Create(objectType, criteria, context, isSync);
+					result = await proxies[i].Create(objectType, criteria, context, isSync);
 					break;
 				}
 				catch { }
@@ -47,12 +47,12 @@ namespace Business.DataPortalProxy {
 			return result ?? throw new Exception("All proxies failed");
 		}
 
-		public Task<DataPortalResult> Update(object obj, DataPortalContext context, bool isSync) {
-			Task<DataPortalResult> result = null;
+		public async Task<DataPortalResult> Update(object obj, DataPortalContext context, bool isSync) {
+			DataPortalResult result = null;
 
 			for (var i = 0; i < proxies.Count; i += 1) {
 				try {
-					result = proxies[i].Update(obj, context, isSync);
+					result = await proxies[i].Update(obj, context, isSync);
 					break;
 				}
 				catch { }
@@ -61,12 +61,12 @@ namespace Business.DataPortalProxy {
 			return result ?? throw new Exception("All proxies failed");
 		}
 
-		public Task<DataPortalResult> Delete(Type objectType, object criteria, DataPortalContext context, bool isSync) {
-			Task<DataPortalResult> result = null;
+		public async Task<DataPortalResult> Delete(Type objectType, object criteria, DataPortalContext context, bool isSync) {
+			DataPortalResult result = null;
 
 			for (var i = 0; i < proxies.Count; i += 1) {
 				try {
-					result = proxies[i].Delete(objectType, criteria, context, isSync);
+					result = await proxies[i].Delete(objectType, criteria, context, isSync);
 					break;
 				}
 				catch { }
