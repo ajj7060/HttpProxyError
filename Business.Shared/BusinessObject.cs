@@ -16,7 +16,9 @@ namespace Business {
 
 		#if SERVER_CODE
 
-		private void DataPortal_Fetch() => SomeValue = "From the server";
+		private static int count;
+
+		private void DataPortal_Fetch() => SomeValue = $"From the server {count++}";
 
 		#endif
 	}

@@ -15,8 +15,12 @@ namespace HttpProxyError {
 			base.OnAppearing();
 
 			var obj = await Business.BusinessObject.GetAsync();
-
 			ResultLabel.Text = obj.SomeValue;
+
+			// Repeat call to demonstrate bug
+			obj = await Business.BusinessObject.GetAsync();
+			ResultLabel.Text = obj.SomeValue;
+
 		}
 	}
 }
